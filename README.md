@@ -15,7 +15,6 @@ This integration will help you import the data into Port, from where you can int
         - PORT_CLIENT_ID
         - PORT_CLIENT_SECRET
         - X_GITHUB_ORG
-        - X_GITHUB_ENTERPRISE
         - X_GITHUB_AUTH_TOKEN
 1. Create a blueprint in port for the blueprint below `github_copilot_usage_record`
 1. Add a relation to the blueprint, to some `organization` or other higher level grouping on which you will create an aggregation property. Feel free to copy from the examples below

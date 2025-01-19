@@ -1,0 +1,18 @@
+name: collect_copilot_usage
+on:
+    workflow_dispatch:
+    schedule:
+      - cron: '0 * * * *'
+  jobs:
+    my-job:
+      name: collect_copilot_usage
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: oven-sh/setup-bun@v2
+        - run: bun run main.ts
+          env: # Or as an environment variable
+            PORT_CLIENT_ID: ${{ secrets.PORT_CLIENT_ID }}
+            PORT_CLIENT_SECRET: ${{ secrets.PORT_CLIENT_SECRET }}
+            X_GITHUB_ORG: ${{ secrets.X_GITHUB_ORG }}
+            X_GITHUB_AUTH_TOKEN: ${{ secrets.X_GITHUB_AUTH_TOKEN }}

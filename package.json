@@ -1,13 +1,7 @@
 {
   "dependencies": {
-    "@ai-sdk/amazon-bedrock": "^1.0.6",
-    "@ai-sdk/anthropic": "^1.0.6",
-    "@ai-sdk/cohere": "^1.0.6",
-    "@ai-sdk/mistral": "^1.0.6",
-    "@ai-sdk/openai": "^1.0.11",
     "@octokit/rest": "^21.0.2",
     "axios": "^1.7.9",
-    "commander": "^12.1.0",
     "lodash": "^4.17.21",
     "openai": "^4.77.0"
   },

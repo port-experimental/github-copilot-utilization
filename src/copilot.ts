@@ -1,6 +1,4 @@
 import { Octokit } from '@octokit/rest';
-import { Command } from 'commander';
-import { getEntities, upsertEntity } from './port_client';
 
 async function checkRateLimits(authToken: string) {
     const octokit = new Octokit({ auth: authToken });

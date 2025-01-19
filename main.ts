@@ -25,6 +25,7 @@ async function main() {
       await upsertEntity('github_copilot_usage_record', `copilot_${GITHUB_ORG_NAME}-${metric.day}`, `${GITHUB_ORG_NAME}-${metric.day}`, 
         {
           ...metric,
+          record_date: new Date(metric.day),
           breakdown: { arr: metric.breakdown },
         }, 
         // { organization: 'the_company' }

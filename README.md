@@ -114,6 +114,18 @@ This integration will help you import the data into Port, from where you can int
       "icon": "DefaultProperty",
       "type": "number",
       "target": "github_copilot_usage_record",
+      "query": {
+        "combinator": "and",
+        "rules": [
+          {
+            "property": "record_date",
+            "operator": "between",
+            "value": {
+              "preset": "today"
+            }
+          }
+        ]
+      },
       "calculationSpec": {
         "func": "max",
         "property": "total_lines_suggested",
@@ -125,6 +137,18 @@ This integration will help you import the data into Port, from where you can int
       "icon": "DefaultProperty",
       "type": "number",
       "target": "github_copilot_usage_record",
+      "query": {
+        "combinator": "and",
+        "rules": [
+          {
+            "property": "record_date",
+            "operator": "between",
+            "value": {
+              "preset": "today"
+            }
+          }
+        ]
+      },
       "calculationSpec": {
         "func": "max",
         "property": "total_lines_accepted",
@@ -136,6 +160,18 @@ This integration will help you import the data into Port, from where you can int
       "icon": "DefaultProperty",
       "type": "number",
       "target": "github_copilot_usage_record",
+      "query": {
+        "combinator": "and",
+        "rules": [
+          {
+            "property": "record_date",
+            "operator": "between",
+            "value": {
+              "preset": "today"
+            }
+          }
+        ]
+      },
       "calculationSpec": {
         "func": "max",
         "property": "total_active_users",

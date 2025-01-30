@@ -94,6 +94,84 @@ This integration will help you import the data into Port, from where you can int
 }
 ```
 
+```json
+{
+  "identifier": "gh_copilot_team_usage_record",
+  "description": "A daily summary record of a single team's GitHub Copilot Usage",
+  "title": "GH Copilot Team Usage Record",
+  "icon": "Github",
+  "schema": {
+    "properties": {
+      "total_suggestions_count": {
+        "type": "number",
+        "title": "Total Suggestions Count"
+      },
+      "record_date": {
+        "type": "string",
+        "title": "Record Date",
+        "description": "The date for the summary record",
+        "format": "date-time"
+      },
+      "total_acceptances_count": {
+        "type": "number",
+        "title": "Total Acceptances Count"
+      },
+      "total_lines_suggested": {
+        "type": "number",
+        "title": "Total Lines Suggested"
+      },
+      "total_lines_accepted": {
+        "type": "number",
+        "title": "Total Lines Accepted"
+      },
+      "total_active_users": {
+        "type": "number",
+        "title": "Total Active Users"
+      },
+      "total_chat_acceptances": {
+        "type": "number",
+        "title": "Total Chat Acceptances"
+      },
+      "total_chat_turns": {
+        "type": "number",
+        "title": "Total Chat Turns"
+      },
+      "total_active_chat_users": {
+        "type": "number",
+        "title": "Total Active Chat Users"
+      },
+      "git_hub_org": {
+        "type": "string",
+        "title": "GitHub Org"
+      },
+      "breakdown": {
+        "type": "object",
+        "title": "Breakdown"
+      }
+    },
+    "required": []
+  },
+  "mirrorProperties": {},
+  "calculationProperties": {},
+  "aggregationProperties": {},
+  "relations": {
+    "github_team": {
+      "title": "Github Team",
+      "description": "The GitHub team",
+      "target": "githubTeam",
+      "required": true,
+    }
+    // "organization": {
+    //   "title": "Organization",
+    //   "description": "The top of the org hierarchy",
+    //   "target": "organization",
+    //   "required": false,
+    //   "many": false
+    }
+  }
+}
+```
+
 #### Aggregation Properties
 
 ```

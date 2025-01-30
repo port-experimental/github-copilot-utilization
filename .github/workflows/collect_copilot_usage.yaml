@@ -2,8 +2,8 @@ name: collect_copilot_usage
 on:
     workflow_dispatch:
     schedule:
-      - cron: '0 * * * *'
-  jobs:
+      - cron: '0 0 * * *'
+jobs:
     my-job:
       name: collect_copilot_usage
       runs-on: ubuntu-latest

@@ -1,5 +1,5 @@
 import { upsertEntity } from './src/port_client';
-import { getCopilotUsageMetrics } from './src/copilot';
+import { getCopilotTeamUsageMetrics, getCopilotUsageMetrics, getTeams } from './src/github';
 
 async function main() {
   const GITHUB_ORG_NAME = process.env.X_GITHUB_ORG;
@@ -18,7 +18,8 @@ async function main() {
   }
 
   try {
-    console.log('fetching copilot')
+    // First, let's get the org level usage metrics
+    console.log('fetching org level copilot metrics');
     const metrics = await getCopilotUsageMetrics(AUTH_TOKEN, GITHUB_ORG_NAME);
     for (const metric of metrics) {
       console.log(metric);
@@ -31,6 +32,30 @@ async function main() {
         // { organization: 'the_company' }
         {});
     }
+
+    // Second, let's get the usage metrics per team
+    // But we need the teams
+
+    console.log('fetching github teams');
+    const teams = await getTeams(AUTH_TOKEN, GITHUB_ORG_NAME);
+    for (const team of teams) {
+      console.log(`fetching usage metrics for team ${team.slug}`);
+      const teamMetrics = await getCopilotTeamUsageMetrics(AUTH_TOKEN, GITHUB_ORG_NAME, team.slug);
+      for (const metric of teamMetrics) {
+        console.log(metric);
+        await upsertEntity('github_copilot_team_usage_record', `copilot_${GITHUB_ORG_NAME}_${team.slug}-${metric.day}`, `${GITHUB_ORG_NAME}_${team.slug}-${metric.day}`,
+          {
+            ...metric,
+            record_date: new Date(metric.day),
+            breakdown: { arr: metric.breakdown },
+            team: team.slug
+          },
+          // { organization: GITHUB_ORG_NAME }
+          {}
+          );
+      }
+    }
+
   } catch (error) {
     console.error('Error:', error);
   }

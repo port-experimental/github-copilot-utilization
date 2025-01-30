@@ -39,6 +39,22 @@ export interface CopilotUsageMetrics {
     breakdown: CopilotUsageBreakdown[] | null;
 }
 
+export interface GithubTeam {
+    id: number;
+    node_id: string;
+    url: string;
+    html_url: string;
+    name: string;
+    slug: string;
+    description: string;
+    privacy: string;
+    notification_setting: string;
+    permission: string;
+    members_url: string;
+    repositories_url: string;
+    parent: null | GithubTeam;
+}
+
 export async function getCopilotUsageMetrics(
     authToken: string,
     org: string
@@ -50,6 +66,36 @@ export async function getCopilotUsageMetrics(
             'X-GitHub-Api-Version': '2022-11-28'
         }
     });
-
+    
     return result.data as CopilotUsageMetrics[];
+}
+
+export async function getCopilotTeamUsageMetrics(
+    authToken: string, 
+    org: string,
+    teamSlug: string
+): Promise<CopilotUsageMetrics[]> {
+    const octokit = new Octokit({ auth: authToken });
+    const result = await octokit.request('GET /orgs/{org}/teams/{team_slug}/copilot/usage', {
+        org,
+        team_slug: teamSlug,
+        headers: {
+            'X-GitHub-Api-Version': '2022-11-28'
+        }
+    });
+    
+    return result.data as CopilotUsageMetrics[];
+}
+
+export async function getTeams(authToken: string, org: string): Promise<GithubTeam[]> {
+    const octokit = new Octokit({ auth: authToken });
+    
+    const result = await octokit.request('GET /orgs/{org}/teams', {
+        org,
+        headers: {
+            'X-GitHub-Api-Version': '2022-11-28'
+        }
+    });
+
+    return result.data as GithubTeam[];
 }
